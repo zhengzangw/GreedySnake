@@ -26,7 +26,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     void showabout();
-    QAction *pauseAction,*aboutAction;
+    QAction *pauseAction,*aboutAction,*easy,*middle,*hard;
+    QMenu *diffAction;
 
     void initScene();
     void initSceneBackground();

@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     setWindowTitle(tr("GreedySnake"));
 
-    aboutAction = new QAction(tr("&About..."),this);
+    aboutAction = new QAction(tr("Info"),this); //About 不能乱用
     aboutAction->setStatusTip(tr("View information about this game."));
     connect(aboutAction,&QAction::triggered,this,&MainWindow::showabout);
 
@@ -30,9 +30,26 @@ MainWindow::MainWindow(QWidget *parent) :
     pauseAction->setShortcut(QKeySequence::Redo);
     connect(pauseAction,&QAction::triggered,game,&Gamecontroller::pause);
 
+    diffAction = new QMenu();
+    diffAction->setTitle("Difficulty");
+
+    hard = new QAction(tr("hard"),diffAction);
+    middle = new QAction(tr("middle"),diffAction);
+    easy = new QAction(tr("easy"),diffAction);
+    hard->setStatusTip(tr("Set speed to fast"));
+    middle->setStatusTip(tr("Set speed to middle"));
+    easy->setStatusTip(tr("Set speed to slow"));
+    connect(hard,&QAction::triggered,game,&Gamecontroller::changehard);
+    connect(middle,&QAction::triggered,game,&Gamecontroller::changemiddle);
+    connect(easy,&QAction::triggered,game,&Gamecontroller::changeeasy);
+
     QMenu *General = menuBar()->addMenu(tr("General"));
     General->addAction(aboutAction);
     General->addAction(pauseAction);
+    General->addMenu(diffAction);
+    diffAction->addAction(hard);
+    diffAction->addAction(middle);
+    diffAction->addAction(easy);
 
     statusBar();
 
@@ -75,5 +92,5 @@ void MainWindow::initSceneBackground()
 
 void MainWindow::showabout()
 {
-    QMessageBox::information(this, tr("Information"),tr("This is a trival game. Just enjoy it!"));
+    QMessageBox::information(this, tr("Info"),tr("This is a trival game. Just enjoy it!"));
 }

@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QTimer>
 
+#include "snake.h"
+
 class QGraphicsScene;
 class QKeyEvent;
 
@@ -22,6 +24,10 @@ public:
     void snakeHitWall(Snake *snake, Wall *wall);
     void snakeAteItself(Snake *snake);
 
+    void changehard();
+    void changemiddle();
+    void changeeasy();
+
 public slots:
     void pause();
     void resume();
@@ -38,6 +44,8 @@ private:
     QGraphicsScene &scene;
 
     Snake *snake;
+
+    Snake::Direction previous = Snake::NoMove;
 };
 
 #endif // GAMECONTROLLER_H

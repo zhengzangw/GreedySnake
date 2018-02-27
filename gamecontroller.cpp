@@ -65,6 +65,14 @@ void Gamecontroller::handleKeyPressed(QKeyEvent *event)
         case Qt::Key_Down:
             snake->setMoveDirection(Snake::MoveDown);
             break;
+        case Qt::Key_Space:
+            if (snake->getMoveDirection()==Snake::NoMove){
+                snake->setMoveDirection(previous);
+            } else {
+                previous = snake->getMoveDirection();
+                snake->setMoveDirection(Snake::NoMove);
+            }
+
     }
 }
 
@@ -103,4 +111,19 @@ void Gamecontroller::gameOver()
     snake = new Snake(*this);
     scene.addItem(snake);
     addNewFood();
+}
+
+void Gamecontroller::changehard()
+{
+    snake->changespeed(1.5);
+}
+
+void Gamecontroller::changemiddle()
+{
+    snake->changespeed(2);
+}
+
+void Gamecontroller::changeeasy()
+{
+    snake->changespeed(3);
 }

@@ -133,11 +133,13 @@ void Snake::advance(int step)
          moveRight();
          break;
     case MoveUp:
-    moveUp();
-    break;
+         moveUp();
+         break;
     case MoveDown:
-    moveDown();
-    break;
+         moveDown();
+         break;
+    case NoMove:
+         break;
     }
 
     setPos(head);
@@ -147,4 +149,14 @@ void Snake::advance(int step)
 void Snake::setMoveDirection(Direction direction)
 {
     moveDirection = direction;
+}
+
+Snake::Direction Snake::getMoveDirection()
+{
+    return moveDirection;
+}
+
+void Snake::changespeed(int x)
+{
+    speed = x;
 }
