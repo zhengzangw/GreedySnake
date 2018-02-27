@@ -20,7 +20,7 @@ void Food::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
     painter->save();
 
     painter->setRenderHint(QPainter::Antialiasing);
-    painter->fillPath(shape(),Qt::red);
+    painter->fillPath(shape(),QColor("#FF8800"));
 
     painter->restore();
 }

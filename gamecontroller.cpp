@@ -13,9 +13,15 @@ Gamecontroller::Gamecontroller(QGraphicsScene &scene, QObject *parent):
 {
     timer.start(1000/33);
 
-    Food *a1 = new Food(0,-50);
-    scene.addItem(a1);
+    int x,y;
+    x = (int) (qrand() % 100) / 10;
+    x*=10;
+    y = (int) (qrand() % 100) / 10;
+    y*=10;
+
+    Food *a1 = new Food(x,y);
     scene.addItem(snake);
+    scene.addItem(a1);
     scene.installEventFilter(this);
 
     resume();

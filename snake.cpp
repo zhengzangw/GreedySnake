@@ -52,7 +52,7 @@ QPainterPath Snake::shape() const
 void Snake::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     painter->save();
-    painter->fillPath(shape(), Qt::yellow);
+    painter->fillPath(shape(), QColor("#E38EFF"));
     painter->restore();
 }
 
