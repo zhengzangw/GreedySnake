@@ -1,12 +1,15 @@
 #include <QEvent>
 #include <QGraphicsScene>
 #include <QKeyEvent>
+#include <QDateTime>
+#include <QDebug>
 
 #include "gamecontroller.h"
 #include "food.h"
 #include "snake.h"
+#include "mainwindow.h"
 
-Gamecontroller::Gamecontroller(QGraphicsScene &scene, QObject *parent):
+Gamecontroller::Gamecontroller(QGraphicsScene &scene, QWidget *parent):
     QObject(parent),
     scene(scene),
     snake(new Snake(*this))
@@ -54,16 +57,24 @@ void Gamecontroller::handleKeyPressed(QKeyEvent *event)
 {
     switch (event->key()) {
         case Qt::Key_Left:
-            snake->setMoveDirection(Snake::MoveLeft);
+            if (snake->getMoveDirection()!=Snake::MoveRight){
+                snake->setMoveDirection(Snake::MoveLeft);
+            }
             break;
         case Qt::Key_Right:
-            snake->setMoveDirection(Snake::MoveRight);
+            if (snake->getMoveDirection()!=Snake::MoveLeft){
+                snake->setMoveDirection(Snake::MoveRight);
+            }
             break;
         case Qt::Key_Up:
-            snake->setMoveDirection(Snake::MoveUp);
+            if (snake->getMoveDirection()!=Snake::MoveDown){
+                snake->setMoveDirection(Snake::MoveUp);
+            }
             break;
         case Qt::Key_Down:
-            snake->setMoveDirection(Snake::MoveDown);
+            if (snake->getMoveDirection()!=Snake::MoveUp){
+                snake->setMoveDirection(Snake::MoveDown);
+            }
             break;
         case Qt::Key_Space:
             if (snake->getMoveDirection()==Snake::NoMove){
@@ -106,8 +117,15 @@ void Gamecontroller::snakeAteItself(Snake *snake)
 
 void Gamecontroller::gameOver()
 {
+    pause();
+    qDebug() << "You died!";
+    QDateTime n2 = QDateTime::currentDateTime();
+    QDateTime now;
+    do{   now=QDateTime::currentDateTime();   } while(n2.secsTo(now)<=0.6);
+
     scene.clear();
 
+    resume();
     snake = new Snake(*this);
     scene.addItem(snake);
     addNewFood();
@@ -115,7 +133,7 @@ void Gamecontroller::gameOver()
 
 void Gamecontroller::changehard()
 {
-    snake->changespeed(1.5);
+    snake->changespeed(1);
 }
 
 void Gamecontroller::changemiddle()

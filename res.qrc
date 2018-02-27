@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/new/images">
         <file alias="doc-open">Open.png</file>
+        <file alias="icon">icon.png</file>
     </qresource>
 </RCC>

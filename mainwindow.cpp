@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent) :
     game(new Gamecontroller(*scene,this))
 {
     setWindowTitle(tr("GreedySnake"));
+    setWindowIcon(QIcon(":/new/images/icon"));
 
     aboutAction = new QAction(tr("Info"),this); //About 不能乱用
     aboutAction->setStatusTip(tr("View information about this game."));

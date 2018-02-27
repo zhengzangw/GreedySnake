@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTimer>
+#include <QMessageBox>
 
 #include "snake.h"
 
@@ -17,7 +18,7 @@ class Gamecontroller : public QObject
 {
     Q_OBJECT
 public:
-    Gamecontroller(QGraphicsScene &scene, QObject *parent=0);
+    Gamecontroller(QGraphicsScene &scene, QWidget *parent=0);
     ~Gamecontroller();
 
     void snakeAteFood(Snake *snake, Food *food);
@@ -27,6 +28,7 @@ public:
     void changehard();
     void changemiddle();
     void changeeasy();
+
 
 public slots:
     void pause();
