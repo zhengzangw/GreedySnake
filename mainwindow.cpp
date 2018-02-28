@@ -95,3 +95,8 @@ void MainWindow::showabout()
 {
     QMessageBox::information(this, tr("Info"),tr("This is a trival game. Just enjoy it!"));
 }
+
+void MainWindow::showpoint(int point,int maxpoint)
+{
+    QMessageBox::information(this, tr("Game over"),tr("Your point: %1\nHistory maxpoint: %2").arg(point).arg(maxpoint));
+}

@@ -6,6 +6,7 @@
 #include <QMessageBox>
 
 #include "snake.h"
+#include "mainwindow.h"
 
 class QGraphicsScene;
 class QKeyEvent;
@@ -18,7 +19,7 @@ class Gamecontroller : public QObject
 {
     Q_OBJECT
 public:
-    Gamecontroller(QGraphicsScene &scene, QWidget *parent=0);
+    Gamecontroller(QGraphicsScene &scene, MainWindow *parent=0);
     ~Gamecontroller();
 
     void snakeAteFood(Snake *snake, Food *food);
@@ -28,7 +29,7 @@ public:
     void changehard();
     void changemiddle();
     void changeeasy();
-
+    int point,maxpoint=0;
 
 public slots:
     void pause();
@@ -48,6 +49,7 @@ private:
     Snake *snake;
     Wall *wall;
     Snake::Direction previous = Snake::NoMove;
+    MainWindow *p;
 };
 
 #endif // GAMECONTROLLER_H

@@ -11,11 +11,13 @@
 #include "mainwindow.h"
 #include "wall.h"
 
-Gamecontroller::Gamecontroller(QGraphicsScene &scene, QWidget *parent):
-    QObject(parent),
+Gamecontroller::Gamecontroller(QGraphicsScene &scene, MainWindow *parent):
+    p(parent),
     scene(scene),
     snake(new Snake(*this)),
-    wall(new Wall(*this))
+    wall(new Wall(*this)),
+    point(0),
+    maxpoint(0)
 {
     timer.start(1000/33);
 
@@ -96,6 +98,7 @@ void Gamecontroller::snakeAteFood(Snake *snake, Food *food)
     scene.removeItem(food);
     delete food;
 
+    point +=1;
     addNewFood();
 }
 
@@ -127,12 +130,15 @@ void Gamecontroller::snakeHitWall(Snake *snake, Wall *wall)
 void Gamecontroller::gameOver()
 {
     pause();
-    qDebug() << "You died!";
-    QDateTime n2 = QDateTime::currentDateTime();
+    if (point > maxpoint) maxpoint = point;
+    p->showpoint(point,maxpoint);
+
+    /*QDateTime n2 = QDateTime::currentDateTime();
     QDateTime now;
-    do{   now=QDateTime::currentDateTime();   } while(n2.secsTo(now)<=0.6);
+    do{   now=QDateTime::currentDateTime();   } while(n2.secsTo(now)<=0.6);*/
 
     scene.clear();
+    point = 0;
 
     resume();
     snake = new Snake(*this);
@@ -149,10 +155,10 @@ void Gamecontroller::changehard()
 
 void Gamecontroller::changemiddle()
 {
-    snake->changespeed(2);
+    snake->changespeed(3);
 }
 
 void Gamecontroller::changeeasy()
 {
-    snake->changespeed(3);
+    snake->changespeed(4);
 }
