@@ -30,6 +30,7 @@ public:
     void changemiddle();
     void changeeasy();
     void changecrazy();
+    void statechanged();
     int point,maxpoint=0;
 
 public slots:
@@ -51,6 +52,7 @@ private:
     Wall *wall;
     Snake::Direction previous = Snake::NoMove;
     MainWindow *p;
+    bool changed=true;
 };
 
 #endif // GAMECONTROLLER_H

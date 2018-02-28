@@ -61,6 +61,8 @@ bool Gamecontroller::eventFilter(QObject *object, QEvent *event)
 
 void Gamecontroller::handleKeyPressed(QKeyEvent *event)
 {
+    if (changed) {
+    changed = false;
     switch (event->key()) {
         case Qt::Key_Left:
             if (snake->getMoveDirection()!=Snake::MoveRight){
@@ -103,13 +105,14 @@ void Gamecontroller::handleKeyPressed(QKeyEvent *event)
             }
         break;
         case Qt::Key_Space:
+            changed = true;
             if (snake->getMoveDirection()==Snake::NoMove){
                 snake->setMoveDirection(previous);
             } else {
                 previous = snake->getMoveDirection();
                 snake->setMoveDirection(Snake::NoMove);
             }
-
+    }
     }
 }
 
@@ -186,4 +189,9 @@ void Gamecontroller::changeeasy()
 void Gamecontroller::changecrazy()
 {
     snake->changespeed(CRAZY);
+}
+
+void Gamecontroller::statechanged()
+{
+    changed = true;
 }

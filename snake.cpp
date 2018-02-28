@@ -145,7 +145,7 @@ void Snake::advance(int step)
     case NoMove:
          break;
     }
-
+    controller.statechanged();
     setPos(head);
     handleCollisions();
 }
