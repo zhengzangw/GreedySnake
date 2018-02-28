@@ -19,8 +19,8 @@ MainWindow::MainWindow(QWidget *parent) :
     view(new QGraphicsView(scene,this)),
     game(new Gamecontroller(*scene,this))
 {
+    setWindowIcon(QIcon(":/new/prefix1/icon.png"));
     setWindowTitle(tr("GreedySnake1.1"));
-    setWindowIcon(QIcon(":/new/images/icon"));
 
     aboutAction = new QAction(tr("Info"),this); //About 不能乱用
     aboutAction->setStatusTip(tr("View information about this game."));
