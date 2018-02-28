@@ -4,6 +4,7 @@
 #include <QDateTime>
 #include <QDebug>
 
+#include "constants.h"
 #include "gamecontroller.h"
 #include "food.h"
 #include "snake.h"
@@ -103,9 +104,9 @@ void Gamecontroller::addNewFood()
     int x,y;
 
     do {
-        x = (int) (qrand() % 90) / 10;
+        x = (int) (qrand() % (MAP_SIZE-10)) / 10;
         x*=10;
-        y = (int) (qrand() % 90) / 10;
+        y = (int) (qrand() % (MAP_SIZE-10)) / 10;
         y*=10;
     } while (snake->shape().contains(snake->mapFromScene(QPointF(x + 5,y + 5))));
 

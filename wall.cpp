@@ -17,7 +17,7 @@ void Wall::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
     painter->save();
 
     //painter->setRenderHint(QPainter::Antialiasing);
-    painter->fillPath(shape(),QColor("#0000FF"));
+    painter->fillPath(shape(),QColor("#ffbbcb"));
 
     painter->restore();
 }
@@ -40,7 +40,7 @@ QPainterPath Wall::shape() const
 
     foreach (QPointF p, wall_left) {
         QPointF itemp = mapFromScene(p);
-        path.addRect(QRectF(itemp.x()+1,itemp.y()+1,SNAKE_SIZE-1.5,SNAKE_SIZE-1.5));
+        path.addRect(QRectF(itemp.x()+1,itemp.y()+1,SNAKE_SIZE-1.3,SNAKE_SIZE-1.3));
     }
 
     for (int i=-MAP_SIZE;i<=MAP_SIZE;i++){

@@ -39,11 +39,11 @@ QPainterPath Snake::shape() const
     QPainterPath path;
     path.setFillRule(Qt::WindingFill);
 
-    path.addRect(QRectF(0,0,SNAKE_SIZE, SNAKE_SIZE));
+    path.addRect(QRectF(0.5,0.5,SNAKE_SIZE, SNAKE_SIZE));
 
     foreach (QPointF p, tail) {
         QPointF itemp = mapFromScene(p);
-        path.addRect(QRectF(itemp.x(),itemp.y(),SNAKE_SIZE,SNAKE_SIZE));
+        path.addRect(QRectF(itemp.x()+0.5,itemp.y()+0.5,SNAKE_SIZE,SNAKE_SIZE));
     }
 
     return path;
@@ -52,7 +52,7 @@ QPainterPath Snake::shape() const
 void Snake::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     painter->save();
-    painter->fillPath(shape(), QColor("#E38EFF"));
+    painter->fillPath(shape(), QColor("#fffcb2"));
     painter->restore();
 }
 

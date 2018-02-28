@@ -83,8 +83,8 @@ void MainWindow::initSceneBackground()
     QPixmap bg(TILE_SIZE, TILE_SIZE);
 
     QPainter p(&bg);
-    QPen pen(QColor("#33FFDD"), 1, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
-    p.setBrush(QBrush("#CCFF99"));
+    QPen pen(QColor("#dbf7cc"), 0.5, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+    p.setBrush(QBrush("#ffdaa6"));
     p.setPen(QPen(pen));
     p.drawRect(0,0,TILE_SIZE,TILE_SIZE);
 
