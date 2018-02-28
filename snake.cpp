@@ -59,33 +59,33 @@ void Snake::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *
 void Snake::moveLeft()
 {
     head.rx() -= SNAKE_SIZE;
-    if (head.rx() < -100) {
-        head.rx() = 100;
-    }
+    //if (head.rx() < -MAP_SIZE) {
+    //    head.rx() = MAP_SIZE;
+    //}
 }
 
 void Snake::moveRight()
 {
     head.rx() += SNAKE_SIZE;
-    if (head.rx() > 100) {
-        head.rx() = -100;
-    }
+    //if (head.rx() > MAP_SIZE) {
+    //    head.rx() = -MAP_SIZE;
+    //}
 }
 
 void Snake::moveUp()
 {
     head.ry() -= SNAKE_SIZE;
-    if (head.ry() < -100) {
-        head.ry() = 100;
-    }
+    //if (head.ry() < -MAP_SIZE) {
+    //    head.ry() = MAP_SIZE;
+    //}
 }
 
 void Snake::moveDown()
 {
     head.ry() += SNAKE_SIZE;
-    if (head.ry() > 100) {
-        head.ry() = -100;
-    }
+    //if (head.ry() > MAP_SIZE) {
+    //    head.ry() = -MAP_SIZE;
+    //}
 }
 
 void Snake::handleCollisions()
@@ -97,11 +97,15 @@ void Snake::handleCollisions()
             controller.snakeAteFood(this,(Food *)collidingItem);
             growing += 1;
         }
+        if (collidingItem->data(GD_Type) == GO_Wall){
+            controller.snakeHitWall(this,(Wall *)collidingItem);
+        }
     }
 
     if (tail.contains(head)){
         controller.snakeAteItself(this);
     }
+
 }
 
 void Snake::advance(int step)

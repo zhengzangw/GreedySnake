@@ -46,7 +46,7 @@ private:
     QGraphicsScene &scene;
 
     Snake *snake;
-
+    Wall *wall;
     Snake::Direction previous = Snake::NoMove;
 };
 

@@ -75,7 +75,7 @@ void MainWindow::adjustViewSize()
 
 void MainWindow::initScene()
 {
-    scene->setSceneRect(-100,-100,200,200);
+    scene->setSceneRect(-110,-100,230,220);
 }
 
 void MainWindow::initSceneBackground()

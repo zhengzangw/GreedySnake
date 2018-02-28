@@ -4,6 +4,7 @@
 const int TILE_SIZE = 10;
 const qreal SNAKE_SIZE = 10;
 const qreal FOOD_RADIUS = 3;
+const int MAP_SIZE = 100;
 
 enum GameObjectsData {
     GD_Type

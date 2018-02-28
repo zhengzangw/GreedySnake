@@ -8,11 +8,13 @@
 #include "food.h"
 #include "snake.h"
 #include "mainwindow.h"
+#include "wall.h"
 
 Gamecontroller::Gamecontroller(QGraphicsScene &scene, QWidget *parent):
     QObject(parent),
     scene(scene),
-    snake(new Snake(*this))
+    snake(new Snake(*this)),
+    wall(new Wall(*this))
 {
     timer.start(1000/33);
 
@@ -24,6 +26,7 @@ Gamecontroller::Gamecontroller(QGraphicsScene &scene, QWidget *parent):
 
     Food *a1 = new Food(x,y);
     scene.addItem(snake);
+    scene.addItem(wall);
     scene.addItem(a1);
     scene.installEventFilter(this);
 
@@ -100,9 +103,9 @@ void Gamecontroller::addNewFood()
     int x,y;
 
     do {
-        x = (int) (qrand() % 100) / 10;
+        x = (int) (qrand() % 90) / 10;
         x*=10;
-        y = (int) (qrand() % 100) / 10;
+        y = (int) (qrand() % 90) / 10;
         y*=10;
     } while (snake->shape().contains(snake->mapFromScene(QPointF(x + 5,y + 5))));
 
@@ -111,6 +114,11 @@ void Gamecontroller::addNewFood()
 }
 
 void Gamecontroller::snakeAteItself(Snake *snake)
+{
+    QTimer::singleShot(0,this,SLOT(gameOver()));
+}
+
+void Gamecontroller::snakeHitWall(Snake *snake, Wall *wall)
 {
     QTimer::singleShot(0,this,SLOT(gameOver()));
 }
@@ -128,6 +136,8 @@ void Gamecontroller::gameOver()
     resume();
     snake = new Snake(*this);
     scene.addItem(snake);
+    wall = new Wall(*this);
+    scene.addItem(wall);
     addNewFood();
 }
 
