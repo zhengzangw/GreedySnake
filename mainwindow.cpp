@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     view(new QGraphicsView(scene,this)),
     game(new Gamecontroller(*scene,this))
 {
-    setWindowTitle(tr("GreedySnake1.0"));
+    setWindowTitle(tr("GreedySnake1.1"));
     setWindowIcon(QIcon(":/new/images/icon"));
 
     aboutAction = new QAction(tr("Info"),this); //About 不能乱用
@@ -97,7 +97,7 @@ void MainWindow::initSceneBackground()
 
 void MainWindow::showabout()
 {
-    QMessageBox::information(this, tr("Info"),tr("This is a trival game. Just enjoy it!"));
+    QMessageBox::information(this, tr("Info"),tr("使用上下左右或WSAD都可以操控，空格暂停，初始难度为middle,退出程序后不保存记录。"));
 }
 
 void MainWindow::showpoint(int point,int maxpoint)
