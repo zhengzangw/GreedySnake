@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     view(new QGraphicsView(scene,this)),
     game(new Gamecontroller(*scene,this))
 {
-    setWindowTitle(tr("GreedySnake"));
+    setWindowTitle(tr("GreedySnake1.0"));
     setWindowIcon(QIcon(":/new/images/icon"));
 
     aboutAction = new QAction(tr("Info"),this); //About 不能乱用
@@ -34,12 +34,15 @@ MainWindow::MainWindow(QWidget *parent) :
     diffAction = new QMenu();
     diffAction->setTitle("Difficulty");
 
+    crazy = new QAction(tr("crazy"),diffAction);
     hard = new QAction(tr("hard"),diffAction);
     middle = new QAction(tr("middle"),diffAction);
     easy = new QAction(tr("easy"),diffAction);
+    crazy->setStatusTip(tr("Set speed to crazy"));
     hard->setStatusTip(tr("Set speed to fast"));
     middle->setStatusTip(tr("Set speed to middle"));
     easy->setStatusTip(tr("Set speed to slow"));
+    connect(crazy,&QAction::triggered,game,&Gamecontroller::changecrazy);
     connect(hard,&QAction::triggered,game,&Gamecontroller::changehard);
     connect(middle,&QAction::triggered,game,&Gamecontroller::changemiddle);
     connect(easy,&QAction::triggered,game,&Gamecontroller::changeeasy);
@@ -48,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     General->addAction(aboutAction);
     General->addAction(pauseAction);
     General->addMenu(diffAction);
+    diffAction->addAction(crazy);
     diffAction->addAction(hard);
     diffAction->addAction(middle);
     diffAction->addAction(easy);

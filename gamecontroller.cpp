@@ -14,12 +14,12 @@
 Gamecontroller::Gamecontroller(QGraphicsScene &scene, MainWindow *parent):
     p(parent),
     scene(scene),
-    snake(new Snake(*this)),
+    snake(new Snake(*this,MIDDLE)),
     wall(new Wall(*this)),
     point(0),
     maxpoint(0)
 {
-    timer.start(1000/33);
+    timer.start(10);
 
     int x,y;
     x = (int) (qrand() % 100) / 10;
@@ -67,21 +67,41 @@ void Gamecontroller::handleKeyPressed(QKeyEvent *event)
                 snake->setMoveDirection(Snake::MoveLeft);
             }
             break;
+        case Qt::Key_A:
+            if (snake->getMoveDirection()!=Snake::MoveRight){
+                snake->setMoveDirection(Snake::MoveLeft);
+            }
+        break;
         case Qt::Key_Right:
             if (snake->getMoveDirection()!=Snake::MoveLeft){
                 snake->setMoveDirection(Snake::MoveRight);
             }
             break;
+        case Qt::Key_D:
+            if (snake->getMoveDirection()!=Snake::MoveLeft){
+                snake->setMoveDirection(Snake::MoveRight);
+            }
+        break;
         case Qt::Key_Up:
             if (snake->getMoveDirection()!=Snake::MoveDown){
                 snake->setMoveDirection(Snake::MoveUp);
             }
             break;
+        case Qt::Key_W:
+            if (snake->getMoveDirection()!=Snake::MoveDown){
+                snake->setMoveDirection(Snake::MoveUp);
+            }
+        break;
         case Qt::Key_Down:
             if (snake->getMoveDirection()!=Snake::MoveUp){
                 snake->setMoveDirection(Snake::MoveDown);
             }
             break;
+        case Qt::Key_S:
+            if (snake->getMoveDirection()!=Snake::MoveUp){
+                snake->setMoveDirection(Snake::MoveDown);
+            }
+        break;
         case Qt::Key_Space:
             if (snake->getMoveDirection()==Snake::NoMove){
                 snake->setMoveDirection(previous);
@@ -132,7 +152,7 @@ void Gamecontroller::gameOver()
     pause();
     if (point > maxpoint) maxpoint = point;
     p->showpoint(point,maxpoint);
-
+    int t = snake->getSpeed();
     /*QDateTime n2 = QDateTime::currentDateTime();
     QDateTime now;
     do{   now=QDateTime::currentDateTime();   } while(n2.secsTo(now)<=0.6);*/
@@ -141,7 +161,7 @@ void Gamecontroller::gameOver()
     point = 0;
 
     resume();
-    snake = new Snake(*this);
+    snake = new Snake(*this,t);
     scene.addItem(snake);
     wall = new Wall(*this);
     scene.addItem(wall);
@@ -150,15 +170,20 @@ void Gamecontroller::gameOver()
 
 void Gamecontroller::changehard()
 {
-    snake->changespeed(1);
+    snake->changespeed(HARD);
 }
 
 void Gamecontroller::changemiddle()
 {
-    snake->changespeed(3);
+    snake->changespeed(MIDDLE);
 }
 
 void Gamecontroller::changeeasy()
 {
-    snake->changespeed(4);
+    snake->changespeed(EASY);
+}
+
+void Gamecontroller::changecrazy()
+{
+    snake->changespeed(CRAZY);
 }

@@ -17,7 +17,7 @@ public:
         MoveDown
     };
 
-    Snake(Gamecontroller &controller);
+    Snake(Gamecontroller &controller,int SP);
 
     QRectF boundingRect() const;
     QPainterPath shape() const;
@@ -27,6 +27,7 @@ public:
     void setMoveDirection(Direction direction);
     Direction getMoveDirection();
     void changespeed(int);
+    int getSpeed();
 
 protected:
     void advance(int step);

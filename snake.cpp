@@ -4,10 +4,10 @@
 
 #include <QPainter>
 
-Snake::Snake(Gamecontroller &controller) :
+Snake::Snake(Gamecontroller &controller,int SP) :
     head(0,0),
     growing(7),
-    speed(3),
+    speed(SP),
     moveDirection(NoMove),
     controller(controller)
 {}
@@ -163,4 +163,9 @@ Snake::Direction Snake::getMoveDirection()
 void Snake::changespeed(int x)
 {
     speed = x;
+}
+
+int Snake::getSpeed()
+{
+    return speed;
 }

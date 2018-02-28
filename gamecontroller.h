@@ -29,6 +29,7 @@ public:
     void changehard();
     void changemiddle();
     void changeeasy();
+    void changecrazy();
     int point,maxpoint=0;
 
 public slots:
